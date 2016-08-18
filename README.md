@@ -15,7 +15,7 @@ Enables quick switching between AWS profiles. Supports both hard-coded keys and 
 ## Install
  (requires [jq](https://stedolan.github.io/jq/))
 ```fish
-$ omf install asp
+$ omf install git@github.com:mgoodness/plugin-asp.git
 ```
 
 
@@ -29,7 +29,7 @@ Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to 
 ```fish
 $ asp
 ```
-If set, echoes `$AWS_DEFAULT_PROFILE` and renews its credentials.
+If it is set, echoes `$AWS_DEFAULT_PROFILE` and renews its credentials.
 
 
 ## Example configuration
