@@ -12,8 +12,13 @@
 Enables quick switching between AWS profiles. Supports both hard-coded keys and role assumption.
 
 
+## Prerequisites
+- [jq](https://stedolan.github.io/jq/)
+- [AWS CLI](https://aws.amazon.com/cli/)
+- AWK
+
+
 ## Install
- (requires [jq](https://stedolan.github.io/jq/))
 ```fish
 $ omf install git@github.com:mgoodness/plugin-asp.git
 ```

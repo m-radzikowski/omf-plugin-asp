@@ -1,11 +1,11 @@
-function asp --description 'Switches AWS profile' --argument 'aws_profile'
+function asp -d 'Switches AWS profile' -a 'aws_profile'
   if test -n "$aws_profile"
     if fgrep -q "[profile $aws_profile]" ~/.aws/config
       set -l region (awk "/\[profile\ $aws_profile\]/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" ~/.aws/config)
 
       if test -z "$region"
         echo "No region listed for $aws_profile profile"
-        return
+        return 1
       end
 
       set -l access_key (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"aws_access_key_id\") { print \$3 }}" ~/.aws/credentials)
@@ -23,8 +23,8 @@ function asp --description 'Switches AWS profile' --argument 'aws_profile'
           set secret_key (echo $json | jq -r '.Credentials.SecretAccessKey')
           set session_token (echo $json | jq -r '.Credentials.SessionToken')
         else
-          error="Invalid $aws_profile profile in ~/.aws/credentials"
-          return
+          echo "Invalid $aws_profile profile in ~/.aws/credentials"
+          return 1
         end
       end
 
@@ -35,7 +35,8 @@ function asp --description 'Switches AWS profile' --argument 'aws_profile'
       set -gx AWS_DEFAULT_REGION "$region"
       set -gx AWS_DEFAULT_PROFILE "$aws_profile"
     else
-      error="No $aws_profile profile found in ~/.aws/config"
+      echo "No $aws_profile profile found in ~/.aws/config"
+      return 1
     end
 
   else
