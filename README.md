@@ -9,7 +9,7 @@
 
 <br/>
 
-Enables quick switching between AWS profiles. Supports both hard-coded keys and role assumption.
+Enables quick switching between AWS profiles. Supports both hard-coded keys and role assumption. Works with the [aws](https://github.com/oh-my-fish/plugin-aws) plugin by [@sagebind](https://github.com/sagebind).
 
 
 ## Prerequisites
