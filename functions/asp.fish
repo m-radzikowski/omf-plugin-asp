@@ -1,4 +1,4 @@
-function asp -d 'Switches AWS profile' -a 'aws_profile'
+function asp --description 'Switches AWS profile' --argument-names 'aws_profile'
   if test -n "$aws_profile"
     if fgrep -q "[profile $aws_profile]" ~/.aws/config
       set -l region \
