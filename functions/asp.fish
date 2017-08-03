@@ -1,4 +1,4 @@
-function asp --description 'Switches AWS profile' --argument-names 'aws_profile'
+function asp --description 'Switches AWS profile' --argument-names aws_profile region
   if test -z "$aws_profile"
     echo "usage: asp <profile>"
     return 1
@@ -10,8 +10,10 @@ function asp --description 'Switches AWS profile' --argument-names 'aws_profile'
   set -l secret_key \
     (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"aws_secret_access_key\") { print \$3 }}" \
       $HOME/.aws/credentials)
+  set -l session_token \
+    (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"aws_session_token\") { print \$3 }}" \
+      $HOME/.aws/credentials)
 
-  set -l session_token ""
   if test -z "$access_key" -o -z "$secret_key"
     set -l role_arn \
       (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"role_arn\") { print \$3 }}" \
@@ -41,16 +43,17 @@ function asp --description 'Switches AWS profile' --argument-names 'aws_profile'
   set -gx AWS_DEFAULT_PROFILE "$aws_profile"
   set -g aws_profile "$aws_profile"
 
-  set -l region ""
-  if fgrep -qs "$aws_profile" $HOME/.aws/config
-    set region \
-      (awk "/$aws_profile/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
-        $HOME/.aws/config)
-  end
-  if fgrep -qs "[$aws_profile]" $HOME/.aws/credentials
-    set region \
-      (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
-        $HOME/.aws/credentials)
+  if test -z "$region"
+    if fgrep -qs "$aws_profile" $HOME/.aws/config
+      set region \
+        (awk "/$aws_profile/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
+          $HOME/.aws/config)
+    end
+    if fgrep -qs "[$aws_profile]" $HOME/.aws/credentials
+      set region \
+        (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
+          $HOME/.aws/credentials)
+    end
   end
 
   set -gx AWS_DEFAULT_REGION "$region"
