@@ -1,4 +1,4 @@
-function asp -d "Switches AWS profile" -a aws_profile region
+function asp -d 'Switches AWS profile' -a aws_profile region
   if test -z "$aws_profile"
     echo "usage: asp <aws_profile>"
     return 1

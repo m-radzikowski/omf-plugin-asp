@@ -1,6 +1,7 @@
 <img src="https://cdn.rawgit.com/oh-my-fish/oh-my-fish/e4f1c2e0219a17e2c748b824004c8d0b38055c16/docs/logo.svg" align="left" width="144px" height="144px"/>
 
 #### asp
+
 > A plugin for [Oh My Fish][omf-link].
 
 [![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat-square)](/LICENSE)
@@ -13,12 +14,14 @@ Enables quick switching between AWS profiles. Supports both hard-coded keys and 
 
 
 ## Prerequisites
+
 - [jq](https://stedolan.github.io/jq/)
 - [AWS CLI](https://aws.amazon.com/cli/)
 - AWK
 
 
 ## Install
+
 ```fish
 $ omf install git@github.com:mgoodness/plugin-asp.git
 ```
@@ -27,51 +30,45 @@ $ omf install git@github.com:mgoodness/plugin-asp.git
 ## Usage
 
 ```fish
-$ asp $aws_profile
+$ asp <aws_profile>
 ```
-Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to the corresponding values from `~/.aws/credentials`. If keys are not listed in the profile, attempts to assume the profile's `role_arn` and uses the returned keys. Also sets `$AWS_DEFAULT_REGION` from `~/.aws/config`, and `$AWS_DEFAULT_PROFILE`.
+
+Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to the corresponding values from `~/.aws/credentials`. If keys are not listed in the profile, attempts to assume the profile's `role_arn` and uses the returned keys. Also sets `$AWS_DEFAULT_REGION` and `$AWS_DEFAULT_PROFILE`.
 
 ```fish
-$ asp
+$ agp
 ```
-If it is set, echoes `$AWS_DEFAULT_PROFILE` and renews its credentials.
+
+Echoes `$AWS_DEFAULT_PROFILE`.
 
 
 ## Example configuration
+
 ```
 ~/.aws/credentials
 
 [default]
+output = json
+region = us-east-1
 aws_access_key_id = <ACCESS_KEY>
 aws_secret_access_key = <SECRET_KEY>
 
 [prod]
+output = json
+region = us-east-1
 role_arn = arn:aws:iam::<ACCOUNT_NUMBER>:role/<PROD_ROLE_NAME>
 source_profile = default
 
 [stage]
+output = json
+region = us-east-1
 role_arn = arn:aws:iam::<ACCOUNT_NUMBER>:role/<STAGE_ROLE_NAME>
 source_profile = default
 ```
 
-```
-~/.aws/config
-
-[profile default]
-output = json
-region = us-east-1
-
-[profile prod]
-output = json
-region = us-east-1
-
-[profile stage]
-output = json
-region = us-east-1
-```
-
 
 ## Caveats
+
 - Role-based credentials expire after one hour.
 
 
