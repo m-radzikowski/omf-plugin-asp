@@ -1,5 +1,5 @@
-function __fish_print_aws_profiles -d 'Print a list of AWS profiles' -a 'select'
-  command sed -n 's/^\[\(.*\)\]/\1/p' ~/.aws/credentials
+function __fish_print_aws_profiles -d "Prints a list of AWS profiles" -a select
+  command sed -n "s/^\[\(.*\)\]/\1/p" ~/.aws/credentials
 end
 
-complete --command asp --no-files --arguments '(__fish_print_aws_profiles)'
+complete -c asp -f -a "(__fish_print_aws_profiles)"
