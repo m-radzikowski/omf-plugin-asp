@@ -30,16 +30,21 @@ $ omf install git@github.com:mgoodness/plugin-asp.git
 ## Usage
 
 ```fish
-$ asp <aws_profile>
+$ asp <aws_profile> [region]
 ```
 
-Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to the corresponding values from `~/.aws/credentials`. If keys are not listed in the profile, attempts to assume the profile's `role_arn` and uses the returned keys. Also sets `$AWS_DEFAULT_REGION` and `$AWS_DEFAULT_PROFILE`.
+Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to
+the corresponding values from `~/.aws/credentials`. If keys are not listed in the
+profile, attempts to assume the profile's `role_arn` and uses the returned keys.
+Also sets `$AWS_DEFAULT_REGION` and `$AWS_DEFAULT_PROFILE`.
+The optional region value can be used if you wish to override the default region
+configured in your `~/.aws/credential` file..
 
 ```fish
 $ agp
 ```
 
-Echoes `$AWS_DEFAULT_PROFILE`.
+Echoes `$AWS_DEFAULT_PROFILE` and `AWS_DEFAULT_REGION`.
 
 
 ## Example configuration
