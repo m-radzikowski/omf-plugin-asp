@@ -47,7 +47,7 @@ function asp -d 'Switches AWS profile' -a aws_profile region
   if test -z "$region"
     if fgrep -qs "$aws_profile" $HOME/.aws/config
       set region \
-        (awk "/$aws_profile/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
+        (awk "/\[(profile[[:space:]]*)?$aws_profile\]/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
           $HOME/.aws/config)
     end
   end
