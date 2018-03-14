@@ -23,7 +23,11 @@ Enables quick switching between AWS profiles. Supports both hard-coded keys and 
 ## Install
 
 ```fish
-$ omf install git@github.com:mgoodness/plugin-asp.git
+$ omf install git@github.com:sanyer/plugin-asp.git
+```
+
+```fish
+$ fisher install sanyer/plugin-asp
 ```
 
 
@@ -33,15 +37,21 @@ $ omf install git@github.com:mgoodness/plugin-asp.git
 $ asp <aws_profile> [region]
 ```
 
+
 Sets `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY` environment variables to
 the corresponding values from `~/.aws/credentials`. If keys are not listed in the
-profile, attempts to assume the profile's `role_arn` and uses the returned keys.
+profile, attempts to assume the profile's `role_arn` provided in `~/.aws/config` file
+and uses the returned keys.
 Also sets `$AWS_DEFAULT_REGION` and `$AWS_DEFAULT_PROFILE`.
 The optional region value can be used if you wish to override the default region
-configured in your `~/.aws/credential` file..
+configured in your `~/.aws/config` file.
+
+`~/.aws/credentials` and `~/.aws/config` reference: [AWS CLI Configuration Variables](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html)
 
 ```fish
 $ agp
+Profile: <aws_profile>
+Region: <region>
 ```
 
 Echoes `$AWS_DEFAULT_PROFILE` and `AWS_DEFAULT_REGION`.
@@ -49,14 +59,20 @@ Echoes `$AWS_DEFAULT_PROFILE` and `AWS_DEFAULT_REGION`.
 
 ## Example configuration
 
-```
+```ini
 ~/.aws/credentials
+
+[default]
+aws_access_key_id = <ACCESS_KEY>
+aws_secret_access_key = <SECRET_KEY>
+```
+
+```ini
+~/.aws/config
 
 [default]
 output = json
 region = us-east-1
-aws_access_key_id = <ACCESS_KEY>
-aws_secret_access_key = <SECRET_KEY>
 
 [prod]
 output = json
