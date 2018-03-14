@@ -42,7 +42,7 @@ function asp -d 'Switches AWS profile' -a aws_profile region
   set -gx AWS_SESSION_TOKEN "$session_token"
   set -gx AWS_SECURITY_TOKEN "$AWS_SESSION_TOKEN"
   set -gx AWS_DEFAULT_PROFILE "$aws_profile"
-  set -g aws_profile "$aws_profile"
+  set -U aws_profile "$aws_profile"
 
   if test -z "$region"
     if fgrep -qs "$aws_profile" $HOME/.aws/config
