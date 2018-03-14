@@ -17,11 +17,11 @@ function asp -d 'Switches AWS profile' -a aws_profile region
 
   if test -z "$access_key" -o -z "$secret_key"
     set -l role_arn \
-      (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"role_arn\") { print \$3 }}" \
-        $HOME/.aws/credentials)
+      (awk "/$aws_profile/,/^\$/ { if (\$1 == \"role_arn\") { print \$3 }}" \
+        $HOME/.aws/config)
     set -l source_profile \
-      (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"source_profile\") { print \$3 }}" \
-        $HOME/.aws/credentials)
+      (awk "/$aws_profile/,/^\$/ { if (\$1 == \"source_profile\") { print \$3 }}" \
+        $HOME/.aws/config)
 
     if test -n "$role_arn" -a -n "$source_profile"
       set -l json \
@@ -32,7 +32,7 @@ function asp -d 'Switches AWS profile' -a aws_profile region
       set secret_key (echo $json | jq -r '.Credentials.SecretAccessKey')
       set session_token (echo $json | jq -r '.Credentials.SessionToken')
     else
-      echo "Invalid $aws_profile profile in $HOME/.aws/credentials"
+      echo "Invalid $aws_profile profile in $HOME/.aws/config"
       return 1
     end
   end
@@ -49,11 +49,6 @@ function asp -d 'Switches AWS profile' -a aws_profile region
       set region \
         (awk "/$aws_profile/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
           $HOME/.aws/config)
-    end
-    if fgrep -qs "[$aws_profile]" $HOME/.aws/credentials
-      set region \
-        (awk "/\[$aws_profile\]/,/^\$/ { if (\$1 == \"region\") { print \$3 }}" \
-          $HOME/.aws/credentials)
     end
   end
 
