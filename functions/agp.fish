@@ -1,5 +1,7 @@
 function agp -d 'Gets current AWS profile'
-  if test -n "$AWS_DEFAULT_PROFILE"
+  if test -n "$aws_profile"
+    echo "Profile: $aws_profile"
+  else if test -n "$AWS_DEFAULT_PROFILE"
     echo "Profile: $AWS_DEFAULT_PROFILE"
   else
     echo "Profile: No profile set"
