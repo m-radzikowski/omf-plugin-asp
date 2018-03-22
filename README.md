@@ -23,11 +23,11 @@ Enables quick switching between AWS profiles. Supports both hard-coded keys and 
 ## Install
 
 ```fish
-$ omf install git@github.com:sanyer/plugin-asp.git
+$ omf install git@github.com:mgoodness/plugin-asp.git
 ```
 
 ```fish
-$ fisher install sanyer/plugin-asp
+$ fisher install mgoodness/plugin-asp
 ```
 
 
