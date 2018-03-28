@@ -23,24 +23,24 @@ function asp -d 'Switches AWS profile' -a aws_profile region
       (awk "/$aws_profile/,/^\$/ { if (\$1 == \"source_profile\") { print \$3 }}" \
         $HOME/.aws/config)
 
-    if test -n "$role_arn" -a -n "$source_profile"
-      set -l json \
-        (aws sts assume-role --profile "$source_profile" --role-arn "$role_arn" \
-          --role-session-name "$aws_profile" --output json)
-
-      set access_key (echo $json | jq -r '.Credentials.AccessKeyId')
-      set secret_key (echo $json | jq -r '.Credentials.SecretAccessKey')
-      set session_token (echo $json | jq -r '.Credentials.SessionToken')
-    else
-      echo "Invalid $aws_profile profile in $HOME/.aws/config"
-      return 1
-    end
+#    if test -n "$role_arn" -a -n "$source_profile"
+#      set -l json \
+#        (aws sts assume-role --profile "$source_profile" --role-arn "$role_arn" \
+#          --role-session-name "$aws_profile" --output json)
+#
+#      set access_key (echo $json | jq -r '.Credentials.AccessKeyId')
+#      set secret_key (echo $json | jq -r '.Credentials.SecretAccessKey')
+#      set session_token (echo $json | jq -r '.Credentials.SessionToken')
+#    else
+#      echo "Invalid $aws_profile profile in $HOME/.aws/config"
+#      return 1
+#    end
   end
 
-  set -gx AWS_ACCESS_KEY_ID "$access_key"
-  set -gx AWS_SECRET_ACCESS_KEY "$secret_key"
-  set -gx AWS_SESSION_TOKEN "$session_token"
-  set -gx AWS_SECURITY_TOKEN "$AWS_SESSION_TOKEN"
+#  set -gx AWS_ACCESS_KEY_ID "$access_key"
+#  set -gx AWS_SECRET_ACCESS_KEY "$secret_key"
+#  set -gx AWS_SESSION_TOKEN "$session_token"
+#  set -gx AWS_SECURITY_TOKEN "$AWS_SESSION_TOKEN"
   set -gx AWS_DEFAULT_PROFILE "$aws_profile"
   set -U aws_profile "$aws_profile"
 
