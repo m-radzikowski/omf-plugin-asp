@@ -2,6 +2,8 @@ function asp -d 'Switches AWS profile' -a aws_profile region
   if test -z "$aws_profile"
     echo "Usage: asp <aws_profile> [region]"
     echo "Optional region flag to override default region"
+    set available_profiles (__fish_print_aws_profiles)
+    echo "Available profiles: $available_profiles"
     return 1
   end
 
