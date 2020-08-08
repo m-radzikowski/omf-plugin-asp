@@ -6,7 +6,7 @@
 
 [![MIT License][license-badge]](/LICENSE)
 [![Fish Shell Version][fish-badge]](https://fishshell.com)
-[![Oh My Fish Framework][omf-badge]](https://www.github.com/oh-my-fish/oh-my-fish)
+[![Oh My Fish Framework][omf-badge]][omf-link]
 
 <br/>
 
@@ -31,7 +31,7 @@ $ omf install git@github.com:mgoodness/plugin-asp.git
 $ asp <aws_profile> [region]
 ```
 
-Also sets `$AWS_PROFILE` and `$AWS_DEFAULT_PROFILE` variables.  
+Sets `$AWS_PROFILE` and `$AWS_DEFAULT_PROFILE` variables.  
 The optional region value can be used if you wish to override the default region
 configured for the profile.
 
