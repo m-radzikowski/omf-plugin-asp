@@ -8,6 +8,6 @@ function agp -d 'Gets current AWS profile'
   if test -n "$AWS_DEFAULT_REGION"
     echo "Region:  $AWS_DEFAULT_REGION"
   else
-    echo "Region:  No region set"
+    echo "Region:  default"
   end
 end
