@@ -15,12 +15,13 @@ Enables quick switching between AWS profiles.
 ## Prerequisites
 
 - [AWS CLI](https://aws.amazon.com/cli/)
+- [jq](https://stedolan.github.io/jq/)
 - AWK
 
 ## Install
 
 ```fish
-$ omf install git@github.com:mgoodness/plugin-asp.git
+omf install git@github.com:mgoodness/plugin-asp.git
 ```
 
 ## Usage
@@ -28,8 +29,10 @@ $ omf install git@github.com:mgoodness/plugin-asp.git
 ### Set profile
 
 ```fish
-$ asp <aws_profile> [region]
+asp <aws_profile> [region]
 ```
+
+`asp` - **A**WS **S**et **P**rofile
 
 Sets `$AWS_PROFILE` and `$AWS_DEFAULT_PROFILE` variables.  
 The optional region value can be used if you wish to override the default region
@@ -38,16 +41,37 @@ configured for the profile.
 ### Get selected profile
 
 ```fish
-$ agp
+agp
 ```
+
+`agp` - **A**WS **G**et **P**rofile
 
 Echoes `$AWS_PROFILE` and `$AWS_DEFAULT_REGION`.
 
 ### Clear selected profile
 
 ```fish
-$ acp
+acp
 ```
+
+`acp` - **A**WS **C**lear **P**rofile
+
+Clears variables for selected profile and assumed role.
+
+### Assume role
+
+```fish
+aar <role_arn>
+```
+
+`aar` - **A**WS **A**ssume **R**ole
+
+Performs [STS Assume Role](https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html) call
+and sets obtained `$AWS_ACCESS_KEY_ID`, `$AWS_SECRET_ACCESS_KEY`
+and `$AWS_SESSION_TOKEN` variables.
+
+To clear assumed role variables execute either `acp`
+or `asp` command.
 
 # License
 

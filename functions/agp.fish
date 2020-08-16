@@ -10,4 +10,8 @@ function agp -d 'Gets current AWS profile'
   else
     echo "Region:  default"
   end
+
+  if test -n "$__aar_role_arn"
+    echo "Assumed role: $__aar_role_arn"
+  end
 end

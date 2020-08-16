@@ -14,6 +14,11 @@ function asp -d 'Switches AWS profile' -a aws_profile region
     return 1
   end
 
+  set -eg __aar_role_arn
+  set -eg AWS_ACCESS_KEY_ID
+  set -eg AWS_SECRET_ACCESS_KEY
+  set -eg AWS_SESSION_TOKEN
+
   set -gx AWS_PROFILE "$aws_profile"
   set -gx AWS_DEFAULT_PROFILE "$aws_profile"
 
